@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Ayuda para Administradores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <meta name="description" content="Centro de Ayuda para administradores del sistema FoodCash">
+    <meta name="keywords" content="FoodCash, ayuda, soporte, administrador, preguntas frecuentes, contacto">
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel="stylesheet" href="../../css/ayudaVende.css">
+    <meta name="author" content="Luis Seoanes">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div><div class="two"></div><div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Ayuda Admin</div>
+                <div class="logo-container">
+                    <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash">
+                </div>
+                <div class="user-info">
+                    <span id="nombre-usuario">Admin</span>
+                    <span class="role">Administrador</span>
+                </div>
+                <ul class="nav-actions">
+                    <li><a href="#" id="refresh-btn" title="Actualizar"><i class="fas fa-sync-alt"></i></a></li>
+                    <li><a href="../../logout.html" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+             <ul>
+                <li><a href="admin.html"><span class="icon"><i class="fas fa-tachometer-alt"></i></span><span class="title">Dashboard</span></a></li>
+                <li><a href="HistorialPrecompra.html"><span class="icon"><i class="fas fa-receipt"></i></span><span class="title">Precompras</span></a></li>
+                <li><a href="inventario.html" ><span class="icon"><i class="fas fa-boxes"></i></span><span class="title">Inventario</span></a></li>
+                <li><a href="reportes.html" ><span class="icon"><i class="fas fa-chart-line"></i></span><span class="title">Reportes</span></a></li>
+                <li><a href="ayuda.html" class="active"><span class="icon"><i class="fas fa-cogs"></i></span><span class="title">Configuración</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <h1 class="help-header"><i class="fas fa-life-ring"></i> Centro de Ayuda para Administradores</h1>
+            
+            <div class="help-grid">
+                <div class="card">
+                    <h2><i class="fas fa-question-circle"></i> Preguntas Frecuentes de Gestión</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question"><span>¿Cómo añado un nuevo usuario al sistema?</span><i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer"><p>Ve a la sección "Gestión de Usuarios", haz clic en el botón "Añadir Nuevo Usuario" y completa el formulario con los datos requeridos (nombre, cédula, rol, etc.). El sistema creará el usuario y le asignará un saldo inicial si aplica.</p></div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question"><span>¿Cómo edito el precio o stock de un producto?</span><i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer"><p>Navega a la sección "Inventario". Busca el producto que deseas modificar. Utiliza los botones de "Editar" para cambiar sus propiedades (nombre, precio, categoría) o los controles de stock para ajustarlo. Todos los cambios se guardan automáticamente.</p></div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question"><span>¿Cómo genero un reporte de ventas?</span><i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer"><p>En la sección "Reportes de Ventas", podrás encontrar herramientas para filtrar las ventas por rango de fechas, por vendedor o por producto. Selecciona los filtros deseados y haz clic en "Generar Reporte" para visualizar o exportar los datos.</p></div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question"><span>Un padre reporta un error en el saldo de su hijo, ¿qué hago?</span><i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer"><p>Ve a "Gestión de Usuarios", busca al estudiante por su nombre o ID. En los detalles del usuario, podrás ver su historial de transacciones (recargas y compras). Esto te permitirá verificar cualquier discrepancia y realizar un ajuste de saldo manual si es necesario.</p></div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question"><span>¿Cómo gestiono una devolución?</span><i class="fas fa-chevron-down"></i></div>
+                            <div class="faq-answer"><p>Para procesar una devolución, primero busca la transacción original en el perfil del estudiante o en los reportes de ventas. Luego, deberás realizar un ajuste manual: recarga el monto de la venta al saldo del estudiante y ajusta el stock del producto devuelto en la sección de "Inventario".</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-headset"></i> Contactar a Soporte Técnico</h2>
+                    <p>Si encuentras un problema técnico o tienes una consulta que no está en esta lista, contáctanos.</p>
+                    <form class="contact-form" id="contact-support-form">
+                        <div class="input-group"><label for="subject">Asunto</label><input type="text" id="subject" placeholder="Ej: Error al generar reporte" required></div>
+                        <div class="input-group"><label for="message">Mensaje</label><textarea id="message" placeholder="Describe tu problema en detalle aquí..." required></textarea></div>
+                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Mensaje</button>
+                    </form>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> <strong>Soporte Telefónico:</strong> +57 319 656 0265</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Correo Electrónico:</strong> soporte@foodcash.co</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/general.js"></script>
+    <div id="notification-container"></div>
+    <script>
+        // SCRIPT PARA LA FUNCIONALIDAD DE LA PÁGINA DE AYUDA
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lógica del Menú Lateral
+            document.getElementById('sidebar-toggle').addEventListener('click', () => {
+                document.querySelector('.wrapper').classList.toggle('collapse');
+            });
+
+            // Lógica para el Acordeón de FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Lógica para el Formulario de Contacto (Simulación)
+            const contactForm = document.getElementById('contact-support-form');
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                showNotification('Mensaje enviado. Nuestro equipo se pondrá en contacto pronto.');
+                contactForm.reset();
+            });
+
+            // Función para mostrar Notificaciones
+            function showNotification(message) {
+                const container = document.getElementById('notification-container');
+                const notification = document.createElement('div');
+                // Estilos inyectados para simplicidad
+                notification.style.backgroundColor = '#27ae60';
+                notification.style.color = 'white';
+                notification.style.padding = '15px';
+                notification.style.borderRadius = '5px';
+                notification.style.marginBottom = '10px';
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                
+                container.appendChild(notification);
+                setTimeout(() => { notification.remove(); }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>

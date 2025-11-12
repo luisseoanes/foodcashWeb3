@@ -1,0 +1,677 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===== VARIABLES CSS CORPORATIVAS ===== */
+:root {
+  /* Paleta de colores corporativa */
+  --primary-color: #1e40af;        /* Azul corporativo principal */
+  --primary-light: #3b82f6;        /* Azul claro */
+  --primary-dark: #1e3a8a;         /* Azul oscuro */
+  --secondary-color: #059669;       /* Verde éxito/dinero */
+  --accent-color: #f59e0b;          /* Naranja para destacar */
+  
+  /* Colores neutrales profesionales */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  
+  /* Tipografía corporativa */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  
+  /* Espaciado y dimensiones */
+  --sidebar-width: 280px;
+  --sidebar-collapsed: 80px;
+  --navbar-height: 70px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  
+  /* Sombras corporativas */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* ===== RESET Y BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: var(--font-primary);
+}
+
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+  color: var(--neutral-700);
+  line-height: 1.6;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+/* ===== WRAPPER PRINCIPAL ===== */
+.wrapper {
+  margin: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== BARRA SUPERIOR CORPORATIVA ===== */
+.wrapper .top_navbar {
+  width: calc(100% - 32px);
+  height: var(--navbar-height);
+  display: flex;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+}
+
+.wrapper .top_navbar .hamburger {
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(135deg, var(--neutral-800) 0%, var(--neutral-700) 100%);
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  border-top-left-radius: var(--border-radius-xl);
+  border-bottom-left-radius: var(--border-radius-xl);
+}
+
+.wrapper .top_navbar .hamburger:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+}
+
+.wrapper .top_navbar .hamburger div {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Menú superior mejorado */
+.wrapper .top_navbar .top_menu {
+  width: calc(100% - 80px);
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  border-top-right-radius: var(--border-radius-xl);
+  border-bottom-right-radius: var(--border-radius-xl);
+  backdrop-filter: blur(10px);
+}
+
+/* Secciones del menú */
+.top_menu .left-section,
+.top_menu .center-section,
+.top_menu .right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo corporativo */
+.wrapper .top_navbar .top_menu .logo {
+  color: #224c6a;
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Selector de estudiante mejorado */
+.student-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--neutral-50);
+  padding: 8px 16px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--neutral-200);
+  transition: all 0.3s ease;
+}
+
+.student-selector:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgb(30 64 175 / 0.1);
+}
+
+.student-selector span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--neutral-600);
+}
+
+.student-selector select {
+  padding: 6px 12px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--neutral-300);
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 140px;
+  background: white;
+  color: var(--neutral-700);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.student-selector select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgb(30 64 175 / 0.1);
+}
+
+/* Contenedor de saldo sencillo */
+
+/* ===== CONTENEDOR DE SALDO MEJORADO ===== */
+.saldo-container {
+  justify-content: center;
+  padding: 12px 20px;
+  border: 2px solid var(--neutral-200);
+  border-radius: var(--border-radius-lg);
+  min-width: 140px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.saldo-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.saldo-container:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Texto "Saldo:" */
+.saldo-texto, #saldo-texto {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+  text-align: right;
+  width: 100%;
+}
+
+/* Valor del saldo */
+.saldo-container #saldo-usuario, #saldo-usuario {
+  font-size: 20px;
+  font-weight: 700;
+  color: #224c6a;
+  font-family: var(--font-secondary);
+  text-align: right;
+  width: 100%;
+  letter-spacing: -0.5px;
+}
+
+/* Variante con ícono de moneda */
+.saldo-container.with-icon {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.saldo-container.with-icon .saldo-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.saldo-container.with-icon .saldo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #047857 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+/* Íconos de usuario mejorados */
+.wrapper .top_navbar .top_menu ul {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.wrapper .top_navbar .top_menu ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-md);
+  color: var(--neutral-600);
+  background: var(--neutral-100);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--neutral-200);
+}
+
+.wrapper .top_navbar .top_menu ul li a:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.wrapper .top_navbar .top_menu ul li a i {
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* ===== SIDEBAR CORPORATIVO ===== */
+.wrapper .sidebar {
+  position: fixed;
+  top: calc(var(--navbar-height) + 32px);
+  left: 16px;
+  background: linear-gradient(180deg, var(--neutral-800) 0%, var(--neutral-900) 100%);
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--navbar-height) - 48px);
+  border-radius: var(--border-radius-xl);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.wrapper .sidebar ul {
+  list-style: none;
+  padding: 24px 0;
+}
+
+.wrapper .sidebar ul li a {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  color: var(--neutral-300);
+  text-decoration: none;
+  position: relative;
+  margin: 4px 16px;
+  border-radius: var(--border-radius-md);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.wrapper .sidebar ul li a:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary-light);
+  transform: translateX(4px);
+}
+
+.wrapper .sidebar ul li a.active {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.wrapper .sidebar ul li a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: white;
+  border-radius: 0 2px 2px 0;
+}
+
+.wrapper .sidebar ul li a span.icon {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  font-size: 18px;
+}
+
+.wrapper .sidebar ul li a span.title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Estados colapsado del sidebar */
+.wrapper.collapse .sidebar {
+  width: var(--sidebar-collapsed);
+}
+
+.wrapper.collapse .sidebar ul li a {
+  justify-content: center;
+  text-align: center;
+  padding: 16px 12px;
+  margin: 4px 8px;
+}
+
+.wrapper.collapse .sidebar ul li a span.icon {
+  margin: 0;
+}
+
+.wrapper.collapse .sidebar ul li a span.title {
+  display: none;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.wrapper .main_container {
+  margin-top: calc(var(--navbar-height) + 32px);
+  margin-left: calc(var(--sidebar-width) + 32px);
+  padding: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: calc(100vh - var(--navbar-height) - 64px);
+}
+
+.wrapper.collapse .main_container {
+  margin-left: calc(var(--sidebar-collapsed) + 32px);
+}
+
+.wrapper .main_container .item {
+  background: white;
+  margin-bottom: 24px;
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.7;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--neutral-200);
+  transition: all 0.3s ease;
+}
+
+.wrapper .main_container .item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--neutral-300);
+}
+
+/* ===== COMPONENTES ADICIONALES ===== */
+.service-box {
+  max-width: 33.33%;
+  padding: 20px;
+  text-align: center;
+  color: var(--neutral-600);
+  cursor: pointer;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--neutral-200);
+  transition: all 0.3s ease;
+  margin: 8px;
+}
+
+.service-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets */
+@media screen and (max-width: 1024px) {
+  :root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 70px;
+  }
+}
+
+/* --- Estilos para Móviles (hasta 768px) --- */
+@media screen and (max-width: 768px) {
+  /* 1. Pegar todo a los bordes de la pantalla */
+  .wrapper {
+    margin: 0;
+  }
+
+  .wrapper .top_navbar {
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1000;
+    border-radius: 0;
+    height: 60px;
+  }
+  
+  .wrapper .sidebar {
+    top: 60px;
+    left: 0;
+    height: calc(100% - 60px);
+    border-radius: 0;
+    transform: translateX(-100%);
+    z-index: 1100;
+    width: 200px;
+  }
+
+  .wrapper .main_container {
+    margin-left: 0;
+    margin-top: 60px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  /* Mostrar la barra lateral cuando se active con JS */
+  .wrapper.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+  
+  .wrapper.collapse .sidebar {
+    width: 200px;
+  }
+  
+  .wrapper.collapse .main_container {
+    margin-left: 0;
+  }
+
+  /* 2. Ajustes en la barra superior (top_menu) */
+  .wrapper .top_navbar .top_menu {
+    padding: 0 8px;
+  }
+  
+  .top_menu .left-section,
+  .top_menu .center-section,
+  .top_menu .right-section {
+    gap: 6px;
+  }
+  
+  /* 3. Hacer el menú de hamburguesa más pequeño */
+  .wrapper .top_navbar .hamburger {
+    width: 50px;
+    padding: 15px 12px;
+    border-radius: 0;
+  }
+
+  .wrapper .top_navbar .hamburger div {
+    width: 25px;
+  }
+
+  .wrapper .top_navbar .top_menu {
+    width: calc(100% - 50px);
+    border-radius: 0;
+  }
+  
+  /* 4. Selector de estudiante - solo select, sin texto */
+  .student-selector {
+    gap: 0;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+  }
+  
+  .student-selector span {
+    display: none; /* Ocultar completamente el texto "Estudiante:" */
+  }
+  
+  .student-selector select {
+    min-width: 75px;
+    font-size: 11px;
+    padding: 4px 6px;
+    border: 1px solid var(--neutral-300);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  /* 5. Ocultar logos de FoodCash en móvil */
+  .wrapper .top_navbar .top_menu .logo {
+    display: none;
+  }
+
+  /* 6. Saldo móvil más compacto */
+  .saldo-container {
+    padding: 4px 8px;
+    min-width: 60px;
+    background: transparent;
+    border: none;
+  }
+  
+  #saldo-texto {
+    font-size: 8px;
+    margin-bottom: 1px;
+  }
+  
+  #saldo-usuario {
+    font-size: 10px;
+  }
+
+  /* 7. Íconos de usuario apilados verticalmente */
+  .wrapper .top_navbar .top_menu ul {
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+  }
+  
+  .wrapper .top_navbar .top_menu ul li a {
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--neutral-300);
+  }
+
+  .wrapper .top_navbar .top_menu ul li a i {
+    font-size: 11px;
+  }
+}
+
+/* Ajuste adicional para pantallas muy pequeñas */
+@media screen and (max-width: 420px) {
+  .wrapper .top_navbar .top_menu {
+    padding: 0 6px;
+  }
+  
+  .top_menu .left-section,
+  .top_menu .center-section,
+  .top_menu .right-section {
+    gap: 4px;
+  }
+  
+  .student-selector select {
+    min-width: 65px;
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+  
+  .saldo-container {
+    padding: 3px 6px;
+    min-width: 50px;
+  }
+  
+  #saldo-texto {
+    font-size: 7px;
+  }
+  
+  #saldo-usuario {
+    font-size: 9px;
+  }
+  
+  .wrapper .top_navbar .top_menu ul li a {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .wrapper .top_navbar .top_menu ul li a i {
+    font-size: 10px;
+  }
+}
+
+/* ===== ANIMACIONES Y EFECTOS ===== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapper .main_container .item {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Efecto de carga suave */
+.wrapper .sidebar ul li a,
+.wrapper .main_container .item,
+.service-box {
+  opacity: 0;
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+.wrapper .sidebar ul li:nth-child(1) a { animation-delay: 0.1s; }
+.wrapper .sidebar ul li:nth-child(2) a { animation-delay: 0.2s; }
+.wrapper .sidebar ul li:nth-child(3) a { animation-delay: 0.3s; }
+.wrapper .sidebar ul li:nth-child(4) a { animation-delay: 0.4s; }
+
+/* ===== ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states para accesibilidad */
+.wrapper .sidebar ul li a:focus,
+.student-selector select:focus,
+.wrapper .top_navbar .top_menu ul li a:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}

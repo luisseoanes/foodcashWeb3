@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Centro de Ayuda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <meta name="description" content="Centro de Ayuda para vendedores de FoodCash">
+    <meta name="author" content="Luis Seoanes">
+    <link rel="apple-touch-icon" href="img/logo-200x200.png">
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/ayudaVende.css">
+
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Ayuda</div>
+                <div class="logo-container">
+                    <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash">
+                </div>
+                <div class="user-info">
+                    <span id="nombre-usuario">Usuario</span>
+                    <span class="role">Vendedor</span>
+                </div>
+                <ul class="nav-actions">
+                    <li>
+                        <a href="#" id="refresh-btn" title="Actualizar">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../logout.html" title="Cerrar Sesión">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li><a href="pos.html"><span class="icon"><i class="fas fa-cash-register"></i></span><span class="title">Ventas</span></a></li>
+                <li><a href="precompra.html"><span class="icon"><i class="fas fa-box-open"></i></span><span class="title">Entregas</span></a></li>
+                <li><a href="ayuda.html" class="active"><span class="icon"><i class="fas fa-question-circle"></i></span><span class="title">Ayuda</span></a></li>
+                <li><a href="config.html"><span class="icon"><i class="fas fa-cog"></i></span><span class="title">Configuración</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <h1 class="help-header">Centro de Ayuda para Vendedores</h1>
+            
+            <div class="help-grid">
+                <div class="card">
+                    <h2><i class="fas fa-question-circle"></i> Preguntas Frecuentes</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>¿Cómo busco a un estudiante?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>En la sección "Ventas", utiliza la barra de búsqueda principal. Puedes ingresar el ID, nombre o apellido del estudiante para encontrarlo. El sistema mostrará los resultados coincidentes.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>¿Qué hago si el saldo de un estudiante no es suficiente?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>El botón "Finalizar Venta" estará deshabilitado si el total de la compra supera el saldo del estudiante. Deberás informarle al estudiante o retirar productos del carrito para poder continuar.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>¿Cómo aplico una restricción alimenticia?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Las restricciones son gestionadas por los administradores. Si un estudiante tiene una restricción (ej. "No Gaseosas"), el sistema te alertará si intentas agregar un producto restringido a su carrito.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>¿Puedo cancelar una venta ya finalizada?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No. Una vez que una venta es confirmada y procesada, no puede ser cancelada desde el rol de vendedor. Deberás contactar a un administrador para que realice la anulación o devolución correspondiente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-headset"></i> Contactar a Soporte</h2>
+                    <p>Si tienes un problema que no puedes resolver, envíanos un mensaje o contáctanos directamente.</p>
+                    <form class="contact-form" id="contact-support-form">
+                        <div class="input-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" placeholder="Ej: Problema al buscar estudiante" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" placeholder="Describe tu problema en detalle aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Enviar Mensaje</button>
+                    </form>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> <strong>Soporte Telefónico:</strong> +57 319 656 0265</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Correo Electrónico:</strong> soporte@foodcash.co</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/general.js"></script>
+    <script src="../../js/ayuda.js"></script>
+</body>
+</html>

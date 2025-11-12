@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Dashboard Administrador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <meta name="description" content="Dashboard administrativo para el sistema FoodCash">
+    <meta name="author" content="Luis Seoanes">
+    <link rel="apple-touch-icon" href="img/logo-200x200.png">
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../../css/Administradores/Admin.css">
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div> <div class="two"></div> <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Admin</div>
+                <div class="logo-container">
+                    <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash">
+                </div>
+                <div class="user-info">
+                    <span id="nombre-usuario">Admin</span>
+                    <span class="role">Administrador</span>
+                </div>
+                <ul class="nav-actions">
+                    <li><a href="#" id="refresh-btn" title="Actualizar"><i class="fas fa-sync-alt"></i></a></li>
+                    <li><a href="../../logout.html" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+             <ul>
+                <li><a href="admin.html" class="active"><span class="icon"><i class="fas fa-tachometer-alt"></i></span><span class="title">Dashboard</span></a></li>
+                <li><a href="HistorialPrecompra.html"><span class="icon"><i class="fas fa-receipt"></i></span><span class="title">Precompras</span></a></li>
+                <li><a href="inventario.html"><span class="icon"><i class="fas fa-boxes"></i></span><span class="title">Inventario</span></a></li>
+                <li><a href="reportes.html"><span class="icon"><i class="fas fa-chart-line"></i></span><span class="title">Reportes</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-cogs"></i></span><span class="title">Configuración</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <h1 class="dashboard-header"><i class="fas fa-tachometer-alt"></i> Dashboard del Administrador</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="info">
+                        <h3 id="daily-sales" class="loading">Cargando...</h3>
+                        <p>Ventas del Día</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="info">
+                        <h3 id="daily-transactions" class="loading">Cargando...</h3>
+                        <p>Transacciones Hoy</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="info">
+                        <h3 id="low-stock-items" class="loading">Cargando...</h3>
+                        <p>Productos Stock Bajo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h2>Ventas de la Semana</h2>
+                    <div class="chart-container">
+                        <canvas id="weeklySalesChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Ventas por Categoría</h2>
+                    <div class="chart-container">
+                        <canvas id="categorySalesChart"></canvas>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h2>Últimas Transacciones</h2>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Compra</th>
+                                    <th>Usuario ID</th>
+                                    <th>Total</th>
+                                    <th>Fecha</th>
+                                    <th>Productos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="latest-transactions-body">
+                                <tr><td colspan="5" class="loading">Cargando transacciones...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/Administradores/admin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/general.js"></script>
+</body>
+</html

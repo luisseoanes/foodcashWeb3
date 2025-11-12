@@ -1,0 +1,186 @@
+/* css/admin-precompras.css */
+:root {
+    --primary-color: #3498db;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --surface-color: #ffffff;
+    --border-color: #e0e6ed;
+}
+
+.main_container {
+    padding: 20px;
+    background-color: #f4f7f9;
+}
+
+.card {
+    background: var(--surface-color);
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.summary-card {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin-top: 30px;
+}
+
+.summary-card h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.summary-card h4 .fas {
+    margin-right: 10px;
+    color: var(--warning-color);
+}
+
+.summary-card table {
+    font-size: 15px;
+}
+
+.summary-card tbody td:last-child {
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+}
+.card-header h2 {
+    margin: 0 0 25px 0;
+    color: #2c3e50;
+    font-weight: 600;
+}
+.card-header h2 .fas {
+    margin-right: 12px;
+    color: var(--primary-color);
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.filters input, .filters select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.filters input {
+    flex-grow: 1;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    padding: 15px;
+    font-weight: 600;
+    color: #555;
+    border-bottom: 2px solid var(--border-color);
+}
+
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #f1faff;
+}
+
+tbody td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.status-entregado {
+    background-color: #eafaf1;
+    color: #28a745;
+}
+
+.status-pendiente {
+    background-color: #fff8e1;
+    color: #f39c12;
+}
+.loading-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+}
+
+/* ... (todo tu CSS anterior) ... */
+
+/* --- Estilos para la fila de detalles expandible --- */
+.details-row td {
+    background-color: #f8f9fa;
+    padding: 0 !important; /* Reset padding */
+}
+
+.details-content {
+    padding: 20px 25px;
+    background-color: #f1f3f5;
+}
+
+.details-content h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #34495e;
+    font-weight: 600;
+}
+
+.details-item-list {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+
+.details-item-list li {
+    padding: 5px 0;
+    color: #555;
+}
+
+tbody tr.clickable-row {
+    cursor: pointer;
+}
+
+tbody tr.clickable-row:hover {
+    background-color: #eaf5ff;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

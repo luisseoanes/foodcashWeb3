@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta name='author' content='Luis Seoanes'>
+
+<head>
+  <title>Alimentos - Food Cash</title>
+  <link rel="apple-touch-icon" href="../../img/FC.ico">
+  <link rel="stylesheet" href="../../css/General.css">
+  <link rel='shortcut icon' type='image/x-icon' href='../../img/FC.ico'>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="../../css/padres/pedido.css">
+
+</head>
+<body>
+     <div class="wrapper">
+    <div class="top_navbar">
+      <div class="hamburger">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+      </div>
+      <div class="top_menu">
+        <div class="student-selector">
+          <span class="logo">Estudiante:</span>
+          <select id="estudiante-selector">
+            </select>
+        </div>
+        <img src="../../img/FC.png" alt="gimsaber logo" width="50" height="50">
+        <div class="saldo-container">
+          <span id="saldo-texto">Saldo:</span>
+          <span id="saldo-usuario"></span>
+        </div> 
+        <div class="logo">
+          <img width="140" height="140" src="../../img/Logo Largo.png" alt="Logo-Colegio">
+        </div>
+        <ul>
+          <li><a href="Cuenta.html"><i class="fas fa-user" title="Tu cuenta"></i></a></li>
+          <li><a href="../../logout.html"><i class="fas fa-arrow-right" title="Cerrar Sesion"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="sidebar">
+      <ul>
+        <li><a href="../../Padres.html"><span class="icon"><i class="fas fa-home"></i></span><span class="title">Inicio</span></a></li>
+        <li><a href="Alimentacion.html"><span class="icon"><i class="fas fa-carrot"></i></span><span class="title">Mi alimentacion</span></a></li>
+        <li><a href="Recarga.html"><span class="icon"><i class="fas fa-dollar-sign"></i></span><span class="title">Recarga</span></a></li>
+        <li><a href="Comidas.html"><span class="icon"><i class="fas fa-hamburger"></i></span><span class="title">Comidas</span></a></li>
+        <li><a href="Controlp.html"><span class="icon"><i class="fas fa-users-cog"></i></span><span class="title">Parental</span></a></li>
+        <li><a href="pedido.html" class="active"><span class="icon"><i class="fas fa-utensils"></i></span><span class="title">Pedidos</span></a></li>
+        <li><a href="ayuda.html"><span class="icon"><i class="fas fa-headset"></i></span><span class="title">Ayuda</span></a></li>
+      </ul>
+    </div>
+    <div class="main_container">
+
+        <div class="page-header">
+            <h2><i class="fas fa-shopping-basket"></i> Realiza un Pedido</h2>
+            <p>Selecciona los productos que deseas comprar para <span class="nombre-estudiante-header">[Nombre del Estudiante]</span>.</p>
+        </div>
+
+        <div class="pedidos-layout">
+
+            <div class="productos-columna">
+                <div class="filtros-box">
+                    <h4><i class="fas fa-filter"></i> Filtrar Productos</h4>
+                    <div class="filtro-group">
+                        <input type="text" id="filtro-nombre" placeholder="Buscar por nombre...">
+                        <select id="filtro-categoria">
+                            <option value="">Todas las categorías</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Almuerzos">Almuerzos</option>
+                        </select>
+                        <button class="btn-filtrar" title="Buscar"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div id="alimentos-grid" class="alimentos-grid">
+                    
+                
+                </div>
+            </div>
+
+            <div class="carrito-columna">
+                <div class="carrito-sidebar">
+                    <h3><i class="fas fa-shopping-cart"></i> Mi Pedido</h3>
+                    <div id="carrito-items" class="carrito-items-list">
+                        <div class="carrito-vacio">
+                            <i class="fas fa-cart-arrow-down"></i>
+                            <p>Tu carrito está vacío</p>
+                            <span>Agrega productos para comenzar tu pedido.</span>
+                        </div>
+                    </div>
+                    <div class="carrito-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="carrito-subtotal">$0</span>
+                        </div>
+                         <div class="summary-row total">
+                            <span>Total Pedido</span>
+                            <span id="carrito-total">$0</span>
+                        </div>
+                        <div class="summary-row saldo">
+                            <span>Tu Saldo Actual</span>
+                            <span id="carrito-saldo-actual">$25.000</span>
+                        </div>
+                         <div class="summary-row restante">
+                            <span>Saldo Restante</span>
+                            <span id="carrito-saldo-restante">$25.000</span>
+                        </div>
+                        <div id="saldo-insuficiente-warning" class="saldo-warning" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i> Saldo insuficiente para este pedido.
+                        </div>
+                        <button id="btn-realizar-pedido" class="btn-realizar-pedido" disabled>
+                            <i class="fas fa-check-circle"></i> Realizar Pedido
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr style="margin: 40px 0;">
+
+        <div class="historial-pedidos-container card">
+            <div class="card-header">
+                <h3><i class="fas fa-history"></i> Historial de Pedidos de <span class="nombre-estudiante-header">[Estudiante]</span></h3>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historial-table-body">
+                        </tbody>
+                </table>
+            </div>
+            <div id="historial-loading-spinner" class="loading-spinner" style="display: none;"></div>
+        </div>
+    </div>
+
+    <div id="modal-confirmacion" class="modal-container">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <i class="fas fa-question-circle modal-icon"></i>
+            <h3>Confirmar Pedido</h3>
+            <p>Estás a punto de realizar un pedido para <strong class="nombre-estudiante-modal">[Nombre del Estudiante]</strong> por un total de <strong id="modal-total-pedido">$0</strong>.</p>
+            <p class="saldo-info">El monto se descontará de tu saldo actual.</p>
+            <div class="modal-actions">
+                <button class="btn-modal-cancelar" id="btn-modal-cancelar">Cancelar</button>
+                <button class="btn-modal-confirmar" id="btn-modal-confirmar">Confirmar y Pagar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../js/general.js"></script>
+    <script src="../../js/padres/pedidos.js"></script>
+    <script src="../../js/fuentes.js"></script>
+
+</body>

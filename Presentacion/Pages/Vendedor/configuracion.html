@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Configuración</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <meta name="description" content="Configuración del sistema para vendedores de FoodCash">
+    <meta name="author" content="Luis Seoanes">
+    <link rel="apple-touch-icon" href="img/logo-200x200.png">
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos Generales para la Configuración */
+        .main_container {
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+
+        .settings-header {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            font-weight: 300;
+            border-bottom: 1px solid #dfe6e9;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .settings-header .fas {
+            margin-right: 15px;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2 .fas {
+            margin-right: 12px;
+            color: #3498db;
+        }
+
+        /* Estilos para cada item de configuración */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label span {
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        
+        .setting-label p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+
+        /* Estilos para el interruptor (toggle switch) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #27ae60;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Estilos para botones de acción */
+        .btn {
+            background-color: #ecf0f1;
+            color: #34495e;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #bdc3c7;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        /* --- MODO OSCURO --- */
+        body.dark-mode {
+            background-color: #2c3e50;
+        }
+        body.dark-mode .main_container {
+            background-color: #2c3e50;
+        }
+        body.dark-mode .settings-header,
+        body.dark-mode .card h2,
+        body.dark-mode .setting-label span {
+            color: #ecf0f1;
+        }
+        body.dark-mode .card {
+            background-color: #34495e;
+            border-color: #7f8c8d;
+        }
+        body.dark-mode .setting-label p {
+            color: #95a5a6;
+        }
+        body.dark-mode .setting-item {
+            border-bottom-color: #2c3e50;
+        }
+        body.dark-mode .top_navbar,
+        body.dark-mode .sidebar {
+            background-color: #223547;
+        }
+        body.dark-mode .top_menu .logo,
+        body.dark-mode .sidebar .title,
+        body.dark-mode .user-info span,
+        body.dark-mode .sidebar ul li a:hover,
+        body.dark-mode .sidebar ul li a.active {
+            color: #fff;
+        }
+        body.dark-mode .sidebar ul li a {
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Configuración</div>
+                <div class="logo-container">
+                    <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash">
+                </div>
+                <div class="user-info">
+                    <span id="nombre-usuario">Usuario</span>
+                    <span class="role">Vendedor</span>
+                </div>
+                <ul class="nav-actions">
+                    <li><a href="#" id="refresh-btn" title="Actualizar"><i class="fas fa-sync-alt"></i></a></li>
+                    <li><a href="../../logout.html" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li><a href="pos.html"><span class="icon"><i class="fas fa-cash-register"></i></span><span class="title">Ventas</span></a></li>
+                <li><a href="precompra.html"><span class="icon"><i class="fas fa-box-open"></i></span><span class="title">Entregas</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-question-circle"></i></span><span class="title">Ayuda</span></a></li>
+                <li><a href="config.html" class="active"><span class="icon"><i class="fas fa-cog"></i></span><span class="title">Configuración</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <h1 class="settings-header"><i class="fas fa-cog"></i>Configuración del Sistema</h1>
+            
+            <div class="settings-grid">
+                <div class="card">
+                    <h2><i class="fas fa-palette"></i> Apariencia</h2>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Modo Oscuro</span>
+                            <p>Reduce el brillo para menor fatiga visual.</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="theme-switch">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-bell"></i> Notificaciones</h2>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Confirmación de Venta</span>
+                            <p>Mostrar ventana emergente al finalizar.</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="sale-confirm-switch" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                     <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Alertas de Saldo Bajo</span>
+                            <p>Notificar si el saldo del estudiante es bajo.</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="low-balance-alert-switch" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><i class="fas fa-user-shield"></i> Cuenta</h2>
+                     <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Usuario</span>
+                            <p id="info-username">cajero01</p>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Nombre</span>
+                             <p id="info-fullname">Carlos Pérez</p>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Cambiar Contraseña</span>
+                        </div>
+                        <div class="setting-control">
+                           <button class="btn">Cambiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2><i class="fas fa-tools"></i> Avanzado</h2>
+                     <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Limpiar Caché Local</span>
+                            <p>Soluciona problemas de datos obsoletos.</p>
+                        </div>
+                        <div class="setting-control">
+                           <button class="btn" id="clear-cache-btn">Limpiar ahora</button>
+                        </div>
+                    </div>
+                     <div class="setting-item">
+                        <div class="setting-label">
+                            <span>Restaurar Configuraciones</span>
+                            <p>Vuelve a los ajustes por defecto.</p>
+                        </div>
+                        <div class="setting-control">
+                           <button class="btn btn-danger" id="reset-settings-btn">Restaurar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Lógica del Menú Lateral ---
+            document.getElementById('sidebar-toggle').addEventListener('click', () => {
+                document.querySelector('.wrapper').classList.toggle('collapse');
+            });
+
+            // --- Lógica de Configuración ---
+            const themeSwitch = document.getElementById('theme-switch');
+
+            // Cargar configuración guardada
+            function loadSettings() {
+                // Tema (Modo Oscuro)
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeSwitch.checked = true;
+                }
+                
+                // Cargar otras configuraciones...
+                // Ejemplo:
+                const saleConfirm = localStorage.getItem('saleConfirm') !== 'false'; // true por defecto
+                document.getElementById('sale-confirm-switch').checked = saleConfirm;
+            }
+
+            // Guardar configuración
+            function saveSetting(key, value) {
+                localStorage.setItem(key, value);
+            }
+
+            // --- Event Listeners para los controles ---
+
+            // Interruptor de Tema
+            themeSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('dark-mode');
+                    saveSetting('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    saveSetting('theme', 'light');
+                }
+            });
+            
+            // Interruptor de Confirmación de Venta
+            document.getElementById('sale-confirm-switch').addEventListener('change', function() {
+                saveSetting('saleConfirm', this.checked);
+                alert('Configuración de notificación guardada.');
+            });
+
+            // Botón de Limpiar Caché
+            document.getElementById('clear-cache-btn').addEventListener('click', function() {
+                if (confirm('¿Estás seguro de que quieres limpiar la caché local? Esto podría cerrar tu sesión.')) {
+                    localStorage.clear();
+                    alert('Caché local limpiada. La página se recargará.');
+                    location.reload();
+                }
+            });
+
+            // Botón de Restaurar Configuraciones
+            document.getElementById('reset-settings-btn').addEventListener('click', function() {
+                if (confirm('¿Estás seguro? Todas tus configuraciones se restaurarán a los valores por defecto.')) {
+                    // Borra solo las llaves de configuración, no todo (como el token de sesión)
+                    localStorage.removeItem('theme');
+                    localStorage.removeItem('saleConfirm');
+                    alert('Configuraciones restauradas. La página se recargará.');
+                    location.reload();
+                }
+            });
+            
+            // Cargar las configuraciones al iniciar la página
+            loadSettings();
+        });
+    </script>
+</body>
+</html>

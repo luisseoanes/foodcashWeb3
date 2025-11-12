@@ -1,0 +1,365 @@
+/* =================================================================
+   css/entregas.css - VERSIÓN MEJORADA
+   ================================================================= */
+
+/* --- Importar Fuente y Definir Variables Globales --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #3498db;
+    --primary-color-dark: #2980b9;
+    --success-color: #2ecc71;
+    --success-color-dark: #27ae60;
+    --danger-color: #e74c3c;
+    --secondary-color: #2c3e50;
+    --background-color: #f4f7f9;
+    --surface-color: #ffffff;
+    --text-color: #34495e;
+    --text-color-light: #7f8c8d;
+    --border-color: #e0e6ed;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* --- Estilos Base --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 40px 0;
+}
+
+/* --- Contenedor Principal --- */
+.main_container {
+    padding: 30px;
+}
+
+.card {
+    background: var(--surface-color);
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.card h2 .fas {
+    margin-right: 12px;
+    color: var(--primary-color);
+}
+
+/* --- Sección de Búsqueda --- */
+.search-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.input-group {
+    position: relative;
+    flex-grow: 1;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bdc3c7;
+    font-size: 18px;
+}
+
+#cedula-input {
+    width: 100%;
+    padding: 15px 15px 15px 50px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: var(--font-family);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#cedula-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+#search-btn {
+    padding: 15px 25px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#search-btn:hover {
+    background: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+}
+#search-btn:active {
+    transform: translateY(0);
+}
+
+.student-info-display {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+    color: var(--secondary-color);
+    text-align: center;
+    background-color: #eaf5ff;
+    border: 1px solid #bde0ff;
+    border-radius: 8px;
+    display: none; /* Se mostrará con JS */
+}
+
+/* --- Contenedor de Resultados y Tarjetas --- */
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.placeholder-text {
+    color: var(--text-color-light);
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 1.1em;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+}
+
+.precompra-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-align: center;
+    opacity: 0; /* Para animación de entrada */
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Animación para que las tarjetas aparezcan suavemente */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.precompra-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.precompra-card .id {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.precompra-card .date, .precompra-card .total {
+    font-size: 15px;
+    color: var(--text-color-light);
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Panel de Detalles --- */
+.details-container {
+    margin-top: 30px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: #fdfdfd;
+}
+.details-container h3 { margin-top: 0; text-align: center; color: var(--secondary-color); font-weight: 600; margin-bottom: 25px; }
+.details-header { text-align: center; margin-bottom: 20px; font-size: 18px; }
+.details-header strong { color: var(--primary-color); }
+.items-list { list-style: none; padding: 0; margin: 20px 0; }
+.items-list li { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-color); font-size: 16px; }
+.items-list li:last-child { border-bottom: none; }
+.item-name { font-weight: 500; }
+.item-details { color: var(--text-color-light); }
+/* ===============================================================
+   NUEVOS ESTILOS PARA DETALLES (DISEÑO TIPO RECIBO)
+   =============================================================== */
+
+/* Contenedor principal del detalle del pedido */
+.details-container.receipt-style {
+    background: linear-gradient(145deg, #ffffff, #f9f9f9);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+    padding: 0; /* Eliminamos el padding antiguo para tener control total */
+    margin-top: 40px;
+    overflow: hidden; /* Necesario para que los bordes redondeados funcionen bien */
+}
+
+/* Encabezado del recibo */
+.receipt-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-header .pedido-info h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.receipt-header .estudiante-info {
+    text-align: right;
+    font-size: 16px;
+}
+.receipt-header .estudiante-info strong {
+    font-weight: 600;
+    display: block;
+}
+
+
+/* Cuerpo del recibo donde van los items */
+.receipt-body {
+    padding: 25px 30px;
+}
+
+.receipt-body h4 {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.receipt-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.receipt-items-list li {
+    display: flex;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px dashed #ddd;
+    font-size: 16px;
+}
+
+.receipt-items-list li:last-child {
+    border-bottom: none;
+}
+
+.item-qty {
+    background-color: #eaf5ff;
+    color: var(--primary-color-dark);
+    font-weight: 700;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.item-name {
+    flex-grow: 1; /* Ocupa el espacio disponible */
+    font-weight: 500;
+}
+
+.item-price {
+    color: var(--text-color-light);
+    font-family: 'Courier New', Courier, monospace; /* Fuente de tipo máquina de escribir */
+}
+
+/* Pie de página del recibo */
+.receipt-footer {
+    padding: 20px 30px;
+    background-color: #f8f9fa;
+    border-top: 2px solid var(--border-color);
+}
+
+.receipt-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.receipt-total .total-label {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* El botón de entrega se queda igual, pero lo adaptamos un poco */
+.receipt-footer .deliver-btn {
+    margin-top: 0; /* Eliminamos el margen superior que ya no es necesario */
+}
+.deliver-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.deliver-btn .fas { font-size: 16px; }
+.deliver-btn:hover:not(:disabled) { background-color: var(--success-color-dark); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4); }
+.deliver-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+.hidden { display: none; }
+
+
+/* --- Media Queries para Responsividad --- */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 15px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Historial de Precompras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/General.css"> <link rel="stylesheet" href="../../css/Administradores/historialPrecompra.css"> <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div><div class="two"></div><div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Admin</div>
+                <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash" style="margin-left: 20px;">
+                <div class="user-info">
+                    <span id="nombre-usuario">Admin</span>
+                    <span class="role">Administrador</span>
+                </div>
+                <ul class="nav-actions">
+                    <li><a href="#" title="Actualizar"><i class="fas fa-sync-alt"></i></a></li>
+                    <li><a href="../../logout.html" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li><a href="admin.html"><span class="icon"><i class="fas fa-tachometer-alt"></i></span><span class="title">Dashboard</span></a></li>
+                <li><a href="HistorialPrecompra.html" class="active"><span class="icon"><i class="fas fa-receipt"></i></span><span class="title">Precompras</span></a></li>
+                <li><a href="inventario.html"><span class="icon"><i class="fas fa-boxes"></i></span><span class="title">Inventario</span></a></li>
+                <li><a href="reportes.html"><span class="icon"><i class="fas fa-chart-line"></i></span><span class="title">Reportes</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-cogs"></i></span><span class="title">Configuración</span></a></li>
+        </div>
+
+        <div class="main_container">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-history"></i> Historial de Todas las Precompras</h2>
+                </div>
+                <div class="filters">
+                    <input type="text" id="filter-input" placeholder="Buscar por nombre o ID de pedido...">
+                    <select id="filter-status">
+                        <option value="todos">Todos los estados</option>
+                        <option value="entregado">Entregado</option>
+                        <option value="pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <div class="summary-card">
+                    <h4><i class="fas fa-boxes-stacked"></i> Resumen de Productos Pendientes</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad Total Pendiente</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pending-items-summary-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr style="margin: 25px 0;">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Estudiante</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Fecha Entrega</th>
+                            </tr>
+                        </thead>
+                        <tbody id="precompras-table-body">
+                            </tbody>
+                    </table>
+                </div>
+                 <div id="loading-spinner" class="loading-spinner" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/Administradores/historialPrecompra.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/general.js"></script>
+</body>
+</html>

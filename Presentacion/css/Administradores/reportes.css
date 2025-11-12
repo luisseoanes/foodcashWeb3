@@ -1,0 +1,173 @@
+.main_container { padding: 20px; background-color: #f4f7f9; }
+.card { background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); padding: 25px; margin-bottom: 20px; }
+.card h2 { font-size: 1.5rem; color: #34495e; margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ecf0f1; }
+.page-header { color: #2c3e50; margin-bottom: 25px; font-size: 2rem; font-weight: 300; display: flex; align-items: center; }
+.page-header .fas { margin-right: 15px; }
+
+/* Estilos específicos para la página de reportes */
+.filter-card { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.filter-card .form-group { display: flex; flex-direction: column; }
+.filter-card label { margin-bottom: 5px; font-size: 0.9rem; color: #555; }
+.filter-card input[type="date"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+.filter-card button { padding: 10px 20px; font-size: 1rem; color: #fff; background-color: #3498db; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; }
+.filter-card button:hover { background-color: #2980b9; }
+
+/* Nuevo botón de impresión */
+.print-btn { 
+    background-color: #27ae60; 
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.print-btn:hover { background-color: #219a52; }
+
+.report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.summary-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.kpi-card { background-color: #fafdff; border-left: 5px solid; padding: 15px; border-radius: 5px; }
+.kpi-card .value { font-size: 2rem; font-weight: bold; color: #2c3e50; }
+.kpi-card .label { font-size: 0.9rem; color: #7f8c8d; }
+.kpi-card.sales { border-color: #27ae60; }
+.kpi-card.transactions { border-color: #3498db; }
+.kpi-card.avg-sale { border-color: #f39c12; }
+.kpi-card.items-sold { border-color: #8e44ad; }
+
+.chart-container { position: relative; height: 350px; width: 100%; }
+.table-responsive { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ecf0f1; }
+th { background-color: #f9fafb; font-weight: 600; }
+#report-placeholder { text-align: center; color: #7f8c8d; padding: 50px; font-size: 1.2rem; }
+.loading-overlay { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.7); z-index: 10; align-items: center; justify-content: center; font-size: 1.5rem; color: #34495e; }
+
+/* Estilos específicos para impresión */
+@media print {
+    body * { visibility: hidden; }
+    .print-content, .print-content * { visibility: visible; }
+    .print-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        color: #000;
+        background: white;
+    }
+    
+    .print-header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 20px;
+    }
+    
+    .print-header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .print-header .company-info {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .print-period {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 25px;
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .print-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .print-kpi {
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    
+    .print-kpi .value {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .print-kpi .label {
+        font-size: 12px;
+        color: #666;
+    }
+    
+    .print-section {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+    }
+    
+    .print-section h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+    
+    .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    
+    .print-table th,
+    .print-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        font-size: 12px;
+    }
+    
+    .print-table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    
+    .print-chart-placeholder {
+        border: 2px dashed #ccc;
+        padding: 30px;
+        text-align: center;
+        margin: 15px 0;
+        font-style: italic;
+        color: #666;
+    }
+    
+    .print-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 10px;
+        color: #666;
+        border-top: 1px solid #ddd;
+        padding: 10px;
+        background: white;
+    }
+    
+    /* Ocultar elementos innecesarios en impresión */
+    .wrapper, .sidebar, .top_navbar, .filter-card,
+    .print-btn, .loading-overlay, #report-placeholder { 
+        display: none !important; 
+    }
+}
+
+/* Contenedor oculto para impresión */
+.print-content {
+    display: none;
+}

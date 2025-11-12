@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Login</title>
+  <link rel='stylesheet' href='css/Inicia Sesion.css'>
+
+  <link rel='shortcut icon' type='image/x-icon' href='img/FC.ico'>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header-section">
+            <div class="">
+                <img src="img/FC.png" width="55" height="55" alt="Logo Food Cash">
+            </div>
+            <h1 class="company-name">FoodCash</h1>
+            <p class="company-tagline">Sistema de Gestión Escolar</p>
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label class="form-label" for="email">Correo Electrónico</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="form-input" 
+                    placeholder="Ingrese su correo institucional"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Contraseña</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="form-input" 
+                    placeholder="Ingrese su contraseña"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="login-button" id="login-btn">
+                Iniciar Sesión
+            </button>
+
+            <div id="alert-message" class="alert"></div>
+            <div id="loading" class="loading-indicator">Verificando credenciales</div>
+        </form>
+
+        <div class="footer-section">
+            <a href="#" class="support-link" onclick="showSupport()">
+                ¿Necesita ayuda? Contactar Soporte Técnico
+            </a>
+            <div class="security-notice">
+                Este es un sistema seguro. Todas las comunicaciones están encriptadas.<br>
+                © 2025 Food Cash. Todos los derechos reservados.
+            </div>
+        </div>
+    </div>
+
+    <script>
+     // Configuración de la API
+const apiURL = "https://web-production-b7e6.up.railway.app";
+
+let currentUserType = 'student';
+ 
+// Función para mostrar mensajes
+function mostrarMensaje(mensaje, tipo) {
+    const elemento = document.getElementById('alert-message');
+    elemento.textContent = mensaje;
+    elemento.className = `alert alert-${tipo}`;
+    elemento.style.display = "block";
+
+    // Ocultar después de 5 segundos, excepto si es éxito
+    if (tipo !== 'success') {
+        setTimeout(() => {
+            elemento.style.display = "none";
+        }, 5000);
+    }
+}
+
+// Función para manejar el loading
+function toggleLoading(mostrar) {
+    const loadingElement = document.getElementById('loading');
+    const submitBtn = document.getElementById('login-btn');
+    
+    loadingElement.style.display = mostrar ? 'block' : 'none';
+    submitBtn.disabled = mostrar;
+    submitBtn.textContent = mostrar ? 'Verificando...' : 'Iniciar Sesión';
+}
+
+// Función para ocultar alertas
+function hideAlert() {
+    document.getElementById('alert-message').style.display = 'none';
+}
+
+// Función para guardar token JWT
+function guardarToken(token) {
+    // En tu implementación real, usa localStorage
+    localStorage.setItem('jwtToken', token);
+    
+    // Para el artifact, guardamos en variable temporal
+}
+
+// Función para obtener token JWT
+function obtenerToken() {
+    return localStorage.getItem('jwtToken');
+}
+
+// Función para eliminar token JWT
+function eliminarToken() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('usuario');
+
+}
+
+// Función para hacer peticiones autenticadas
+async function hacerPeticionAutenticada(url, options = {}) {
+    const token = obtenerToken();
+    
+    if (!token) {
+        throw new Error('No hay token de autenticación');
+    }
+    
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
+    
+    return fetch(url, {
+        ...options,
+        headers
+    });
+}
+
+// Función para obtener datos del usuario actual
+async function obtenerDatosUsuario() {
+    try {
+        const response = await hacerPeticionAutenticada(`${apiURL}/me`);
+        
+        if (response.ok) {
+            const userData = await response.json();
+            
+            // Guardar datos del usuario
+            localStorage.setItem('usuario', JSON.stringify(userData));
+            
+            return userData;
+        } else {
+            throw new Error('Error al obtener datos del usuario');
+        }
+    } catch (error) {
+        console.error('Error obteniendo datos del usuario:', error);
+        eliminarToken();
+        throw error;
+    }
+}
+
+// Función para decodificar JWT (básico, sin verificación)
+function decodificarJWT(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                .join('')
+        );
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error('Error decodificando JWT:', error);
+        return null;
+    }
+}
+
+// Función para verificar si token está expirado
+function tokenExpirado(token) {
+    const payload = decodificarJWT(token);
+    if (!payload || !payload.exp) return true;
+    
+    const ahora = Math.floor(Date.now() / 1000);
+    return payload.exp < ahora;
+}
+
+// Manejo de selección de tipo de usuario
+document.querySelectorAll('.user-type-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.user-type-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentUserType = this.dataset.type;
+        
+        const emailInput = document.getElementById('email');
+        if (currentUserType === 'student') {
+            emailInput.placeholder = 'estudiante@colegio.edu';
+        } else {
+            emailInput.placeholder = 'padre@familia.com';
+        }
+        
+        hideAlert();
+    });
+});
+
+// Manejo del formulario de login
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    // Obtener valores del formulario
+    let usuario = document.getElementById('email').value.trim().toLowerCase();
+    let contraseña = document.getElementById('password').value;
+    
+    // Validación básica
+    if (!usuario || !contraseña) {
+        mostrarMensaje('Por favor complete todos los campos', 'error');
+        return;
+    }
+
+    // Mostrar loading
+    toggleLoading(true);
+    hideAlert();
+
+    try {
+        // Realizar petición de login a la API
+        let response = await fetch(`${apiURL}/login`, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ usuario, contraseña })
+        });
+
+        let result = await response.json();
+        
+        if (response.ok && result.access_token) {
+            // Login exitoso - guardamos el token
+            guardarToken(result.access_token);
+            
+            // Decodificar token para obtener información básica
+            const tokenPayload = decodificarJWT(result.access_token);
+            console.log('Token decodificado:', tokenPayload);
+            
+            try {
+                // Obtener datos completos del usuario usando el token
+                const userData = await obtenerDatosUsuario();
+                
+                mostrarMensaje(`¡Bienvenido, ${userData.nombre}!`, "success");
+                
+                console.log('Usuario logueado:', userData);
+
+                // Redirigir según rol después de 1.5 segundos
+                setTimeout(() => {
+                    let redirectUrl;
+                    
+                    switch(userData.rol) {
+                        case "usuario":
+                            redirectUrl = "Padres.html";
+                            break;
+                        case "vendedor":
+                            redirectUrl = "Pages/Vendedor/pos.html";
+                            break;
+                        case "profesor":
+                            redirectUrl = "Pages/profesores/profesores.html";
+                            break;
+                        case "administrador":
+                        case "admin":
+                            redirectUrl = "Pages/Administrador/admin.html";
+                            break;
+                        default:
+                            redirectUrl = "Padres.html";
+                    }
+                    
+                    console.log(`Redirigiendo a: ${redirectUrl}`);
+                    
+                    // En el artifact solo mostramos mensaje, en tu código real funcionará la redirección
+                    mostrarMensaje(`Redirigiendo a ${redirectUrl}...`, 'success');
+                    window.location.href = redirectUrl;
+                    
+                }, 1500);
+                
+            } catch (userError) {
+                // Si falla obtener datos del usuario, limpiar token
+                eliminarToken();
+                mostrarMensaje("Error al obtener datos del usuario", "error");
+            }
+            
+        } else {
+            // Error de login
+            const errorMessage = result.detail || "Usuario o contraseña incorrectos";
+            mostrarMensaje(errorMessage, "error");
+        }
+        
+    } catch (error) {
+        // Error de conexión
+        console.error("Error de conexión:", error);
+        mostrarMensaje("Error de conexión al servidor. Verifique su conexión e intente nuevamente.", "error");
+    } finally {
+        // Ocultar loading
+        toggleLoading(false);
+    }
+});
+
+// Función para cerrar sesión
+function cerrarSesion() {
+    eliminarToken();
+    mostrarMensaje("Sesión cerrada exitosamente", "success");
+    
+    // Redirigir al login después de un momento
+    setTimeout(() => {
+        localStorage.location.href = "login.html";
+    }, 1500);
+}
+
+// Función para verificar autenticación al cargar la página
+function verificarAutenticacion() {
+    const token = obtenerToken();
+    
+    if (token && !tokenExpirado(token)) {
+        console.log('Usuario ya autenticado');
+        return true;
+    } else if (token) {
+        console.log('Token expirado, eliminando...');
+        eliminarToken();
+    }
+    
+    return false;
+}
+
+// Función de soporte
+function showSupport() {
+    const supportInfo = `
+SOPORTE TÉCNICO FOOD CASH
+
+📧 Email: soporte@foodcash.edu
+📞 Teléfono: +1 (555) 123-4567
+⏰ Horario: Lunes a Viernes, 8:00 AM - 6:00 PM
+
+Para estudiantes: Contacte al administrador de su institución
+Para padres: Use el canal de comunicación oficial de la escuela
+
+Respuesta garantizada en menos de 24 horas.
+    `;
+    alert(supportInfo);
+}
+
+// Función para hacer peticiones a endpoints protegidos (ejemplo de uso)
+async function ejemploUsoEndpointProtegido() {
+    try {
+        // Ejemplo: obtener datos del usuario actual
+        const response = await hacerPeticionAutenticada(`${apiURL}/me`);
+        
+        if (response.ok) {
+            const datos = await response.json();
+            console.log('Datos del usuario:', datos);
+        } else if (response.status === 401) {
+            // Token inválido o expirado
+            eliminarToken();
+            mostrarMensaje("Sesión expirada. Por favor, inicie sesión nuevamente.", "error");
+            // Redirigir al login
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Verificar autenticación al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    if (verificarAutenticacion()) {
+        // Si ya está autenticado, podrías redirigir automáticamente
+        console.log('Usuario ya autenticado, considerar redirección automática');
+    }
+});
+
+
+// Exportar funciones para uso global
+localStorage.foodCashAuth = {
+    guardarToken,
+    obtenerToken,
+    eliminarToken,
+    hacerPeticionAutenticada,
+    obtenerDatosUsuario,
+    cerrarSesion,
+    verificarAutenticacion,
+    tokenExpirado
+};
+    </script>
+</body>
+</html>

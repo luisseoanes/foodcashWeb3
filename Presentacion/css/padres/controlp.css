@@ -1,0 +1,218 @@
+    /* Estilos Generales del Contenedor Principal */
+    .main_container {
+      padding-top: 30px;
+    }
+    .page-header {
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+    .page-header h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .page-header .student-selector-parental {
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+    .student-selector-parental select {
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 2px solid #ddd;
+      font-size: 16px;
+      margin-left: 5px;
+    }
+
+    /* Estilos del Sistema de Pestañas */
+    .parental-tabs {
+      display: flex;
+      border-bottom: 2px solid #dee2e6;
+      margin: 0 20px 20px 20px;
+    }
+    .tab-button {
+      padding: 15px 25px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #6c757d;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .tab-button:hover {
+      color: #007bff;
+    }
+    .tab-button.active {
+      color: #007bff;
+      border-bottom-color: #007bff;
+    }
+
+    /* Estilos de los Paneles de Contenido */
+    .tab-pane {
+      display: none;
+      padding: 0 20px;
+      animation: fadeIn 0.5s;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Estilos Pestaña 1: Resumen */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .summary-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid #007bff;
+    }
+    .summary-card-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6c757d;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .summary-card-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+    }
+    .summary-card-value .limit {
+      font-size: 16px;
+      color: #6c757d;
+    }
+    .chart-placeholder {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .chart-placeholder i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      display: block;
+      color: #dee2e6;
+    }
+
+    /* Estilos Pestaña 2: Restricciones */
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .control-list {
+      list-style: none;
+      padding: 0;
+    }
+    .control-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .control-list .item-name {
+      font-weight: 500;
+    }
+    .btn-desbloquear-simple {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .switch { /* Estilos del toggle switch */
+        position: relative; display: inline-block; width: 60px; height: 34px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+    .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+    input:checked + .slider { background-color: #007bff; }
+    input:checked + .slider:before { transform: translateX(26px); }
+    .slider.round { border-radius: 34px; }
+    .slider.round:before { border-radius: 50%; }
+
+    /* Estilos Pestaña 3: Límites */
+    .setting-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .setting-item label {
+      font-weight: 600;
+      flex-grow: 1;
+    }
+    .setting-item input[type="number"] {
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      width: 150px;
+    }
+    .setting-item button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    /* Estilos Pestaña 4: Historial */
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .history-table th, .history-table td {
+      padding: 15px;
+      text-align: left;
+    }
+    .history-table thead {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #333;
+    }
+    .history-table tbody tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    .history-table tbody tr:hover {
+      background: #e9ecef;
+    }

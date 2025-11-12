@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FC - Entrega de Precompras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <meta name="description" content="Sistema de Entrega de Precompras FoodCash">
+    <meta name="author" content="Luis Seoanes">
+    <link rel="apple-touch-icon" href="../../img/logo-200x200.png">
+    
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel="stylesheet" href="../../css/precompra.css"> <link rel="shortcut icon" type="image/x-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper collapse">
+        <div class="top_navbar">
+            <div class="hamburger" id="sidebar-toggle">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo">FoodCash - Entregas</div>
+                <div class="logo-container">
+                    <img src="../../img/FC.png" width="50" height="50" alt="Logo FoodCash">
+                </div>
+                <div class="user-info">
+                    <span id="nombre-usuario">Usuario</span>
+                    <span class="role">Vendedor</span>
+                </div>
+                <ul class="nav-actions">
+                    <li><a href="#" id="refresh-btn" title="Actualizar"><i class="fas fa-sync-alt"></i></a></li>
+                    <li><a href="../../logout.html" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li><a href="pos.html"><span class="icon"><i class="fas fa-cash-register"></i></span><span class="title">Ventas</span></a></li>
+                <li><a href="precompra.html" class="active"><span class="icon"><i class="fas fa-box-open"></i></span><span class="title">Entregas</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-question-circle"></i></span><span class="title">Ayuda</span></a></li>
+                <li><a href="configuracion.html"><span class="icon"><i class="fas fa-cog"></i></span><span class="title">Configuración</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <div class="card">
+                <h2><i class="fas fa-receipt"></i> Entregar Precompra</h2>
+                <div class="search-container">
+                    <div class="input-group">
+                        <i class="fas fa-id-card icon"></i>
+                        <input type="text" id="cedula-input" placeholder="Cédula del estudiante...">
+                    </div>
+                    <button id="search-btn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+            
+            <div id="student-info-display" class="student-info-display"></div>
+
+            <hr>
+
+            <div id="results-container" class="results-container">
+                <p class="placeholder-text">Ingrese una cédula para buscar precompras.</p>
+            </div>
+
+            <div id="details-container" class="details-container hidden">
+                </div>
+        </div>
+    </div>
+
+    <script src="../../js/vendedor/precompra.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/general.js"></script>
+</body>
+</html>

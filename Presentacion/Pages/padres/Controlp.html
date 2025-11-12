@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name='author' content='Luis Seoanes'>
+    <title>Control Parental - Food Cash</title>
+    <link rel="apple-touch-icon" href="../../img/FC.ico">
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel='shortcut icon' type='image/x-icon' href='../../img/FC.ico'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../css/padres/controlp.css">
+    <script src="../../js/general.js"></script>
+ 
+</head>
+<body>
+    <div class="wrapper">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="student-selector">
+                    <span class="logo">Estudiante:</span>
+                    <select id="estudiante-selector">
+                        <option>Cargando...</option>
+                    </select>
+                </div>
+                <img src="../../img/FC.png" alt="gimsaber logo" width="50" height="50">
+        <div class="saldo-container">
+          <span id="saldo-texto">Saldo:</span>
+          <span id="saldo-usuario"></span>
+        </div>         <div class="logo">
+          <img width="140" height="140" src="../../img/Logo Largo.png" alt="Logo-Colegio">
+        </div>
+                <ul>
+                    <li><a href="Cuenta.html"><i class="fas fa-user" title="Tu cuenta"></i></a></li>
+                    <li><a href="../../logout.html"><i class="fas fa-arrow-right" title="Cerrar Sesión"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li><a href="../../Padres.html"><span class="icon"><i class="fas fa-home"></i></span><span class="title">Inicio</span></a></li>
+                <li><a href="Alimentacion.html"><span class="icon"><i class="fas fa-carrot"></i></span><span class="title">Mi alimentacion</span></a></li>
+                <li><a href="Recarga.html"><span class="icon"><i class="fas fa-dollar-sign"></i></span><span class="title">Recarga</span></a></li>
+                <li><a href="Comidas.html"><span class="icon"><i class="fas fa-hamburger"></i></span><span class="title">Comidas</span></a></li>
+                <li><a href="Controlp.html" class="active"><span class="icon"><i class="fas fa-users-cog"></i></span><span class="title">Parental</span></a></li>
+                <li><a href="pedido.html"><span class="icon"><i class="fas fa-utensils"></i></span><span class="title">Pedidos</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-headset"></i></span><span class="title">Ayuda</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <div class="page-header">
+                <h2><i class="fas fa-users-cog"></i>Panel de Control Parental</h2>
+            </div>
+
+            <div class="parental-tabs">
+                <button class="tab-button active" data-tab="resumen">Resumen</button>
+                <button class="tab-button" data-tab="bloqueados">Alimentos Bloqueados</button>
+                <button class="tab-button" data-tab="limites">Límites y Alertas</button>
+                <button class="tab-button" data-tab="historial">Historial</button>
+            </div>
+
+            <div class="parental-content">
+                <div id="resumen" class="tab-pane active">
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-card-label">Saldo Actual</div>
+                            <div class="summary-card-value" id="resumen-saldo">$0</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">Gasto de Hoy</div>
+                            <div class="summary-card-value" id="resumen-gasto-hoy">$0 <span class="limit">/ $0</span></div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-card-label">Alimentos Bloqueados</div>
+                            <div class="summary-card-value" id="resumen-bloqueados">0</div>
+                        </div>
+                    </div>
+                    <h3 class="section-title">Últimas 5 Compras</h3>
+                    <table class="history-table">
+                        <thead><tr><th>Fecha y Hora</th><th>Producto(s)</th><th>Precio Total</th></tr></thead>
+                        <tbody id="resumen-compras-body">
+                            <tr><td colspan="3" style="text-align:center;">Seleccione un estudiante para ver sus compras.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="bloqueados" class="tab-pane">
+                    <h3 class="section-title">Alimentos Bloqueados Individualmente</h3>
+                    <p>Aquí puedes ver los alimentos específicos que has restringido. Puedes desbloquearlos uno por uno.</p>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Alimento</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Fecha de Bloqueo</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bloqueados-body">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div id="limites" class="tab-pane">
+                    <h3 class="section-title">Límites de Gasto</h3>
+                    <div class="setting-item">
+                        <label for="daily-limit">Límite de gasto por día</label>
+                        <input type="number" id="daily-limit" placeholder="Ej: 15000">
+                        <button id="guardar-limite-btn">Guardar Límite</button>
+                    </div>
+                </div>
+
+                <div id="historial" class="tab-pane">
+                    <h3 class="section-title">Historial de Compras Completo</h3>
+                    <table class="history-table">
+                        <thead><tr><th>Fecha y Hora</th><th>Producto(s)</th><th>Categoría</th><th>Precio Total</th></tr></thead>
+                        <tbody id="historial-compras-body">
+                            <tr><td colspan="4" style="text-align:center;">Seleccione un estudiante para ver su historial.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <div id="mensaje-exito" style="display:none;"></div> <script src="../../js/padres/controlp.js"></script>
+    <script src="../../js/fuentes.js"></script>
+    <script src="../../js/general.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!--signup-estudiante.html-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Estudiantes - FoodCash</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #11998e;
+        }
+        
+        select {
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .alert {
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .alert.show {
+            display: block;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #11998e;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .link-usuarios {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .link-usuarios a {
+            color: #11998e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .link-usuarios a:hover {
+            text-decoration: underline;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .helper-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Estudiantes</h1>
+        <p class="subtitle">Sistema FoodCash - Panel Administrativo</p>
+        
+        <form id="registro-estudiante-form">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo <span class="required">*</span></label>
+                <input type="text" id="nombre" placeholder="María López Rodríguez" required>
+                <p class="helper-text">Se guardará en mayúsculas sin tildes</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo Electrónico <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="estudiante@correo.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cedula">Cédula <span class="required">*</span></label>
+                <input type="text" id="cedula" placeholder="1234567890" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha de Nacimiento <span class="required">*</span></label>
+                <input type="date" id="fecha_nacimiento" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="responsable_financiero">Responsable Financiero <span class="required">*</span></label>
+                <select id="responsable_financiero" required>
+                    <option value="">Cargando usuarios...</option>
+                </select>
+                <p class="helper-text">Solo usuarios con rol "Usuario" (Padres/Profesores)</p>
+            </div>
+
+            <button type="submit" id="submit-btn">Registrar Estudiante</button>
+            
+            <div id="registro-loading" class="loading">
+                <span class="spinner"></span>
+                <p style="margin-top: 10px;">Procesando...</p>
+            </div>
+        </form>
+        
+        <div id="registro-mensaje" class="alert"></div>
+        
+        <div class="link-usuarios">
+            <p>¿Necesitas registrar un usuario?</p>
+            <a href="signup.html">← Ir a Registro de Usuarios</a>
+        </div>
+    </div>
+
+<script>
+    const apiURL = "http://127.0.0.1:8000";
+    
+    // Función para mostrar mensajes
+    function mostrarMensaje(mensaje, tipo) {
+        const elemento = document.getElementById('registro-mensaje');
+        elemento.textContent = mensaje;
+        elemento.className = `alert alert-${tipo} show`;
+        
+        setTimeout(() => {
+            elemento.className = 'alert';
+        }, 5000);
+    }
+    
+    // Función para mostrar/ocultar indicador de carga
+    function toggleLoading(mostrar) {
+        const loading = document.getElementById('registro-loading');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        if (mostrar) {
+            loading.classList.add('show');
+            submitBtn.disabled = true;
+        } else {
+            loading.classList.remove('show');
+            submitBtn.disabled = false;
+        }
+    }
+    
+    // Validación de email
+    function validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+    
+    // Cargar responsables financieros (usuarios con rol "usuario") - SIN AUTENTICACIÓN
+    async function cargarResponsables() {
+        const select = document.getElementById('responsable_financiero');
+        
+        try {
+            const response = await fetch(`${apiURL}/usuarios/rol/usuario`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error("Error al cargar usuarios");
+            }
+            
+            const usuarios = await response.json();
+            
+            if (usuarios.length === 0) {
+                select.innerHTML = '<option value="">No hay usuarios disponibles</option>';
+                mostrarMensaje("No hay usuarios con rol 'usuario' registrados", "warning");
+                return;
+            }
+            
+            select.innerHTML = '<option value="">Seleccione un responsable</option>';
+            usuarios.forEach(usuario => {
+                const option = document.createElement('option');
+                option.value = usuario.usuario; // El correo del usuario
+                option.textContent = `${usuario.nombre} (${usuario.usuario})`;
+                select.appendChild(option);
+            });
+            
+        } catch (error) {
+            console.error("Error al cargar responsables:", error);
+            select.innerHTML = '<option value="">Error al cargar</option>';
+            mostrarMensaje("Error al cargar lista de responsables financieros", "danger");
+        }
+    }
+    
+    // Cargar responsables al cargar la página
+    window.addEventListener('DOMContentLoaded', cargarResponsables);
+    
+    // Registro de estudiante - SIN AUTENTICACIÓN
+    document.getElementById("registro-estudiante-form").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById("nombre").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const cedula = document.getElementById("cedula").value.trim();
+        const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+        const responsable_financiero = document.getElementById("responsable_financiero").value;
+
+        // Validaciones frontend
+        if (nombre.length < 3) {
+            mostrarMensaje("El nombre debe tener al menos 3 caracteres", "danger");
+            return;
+        }
+        
+        if (!validarEmail(email)) {
+            mostrarMensaje("Por favor ingresa un correo electrónico válido", "danger");
+            return;
+        }
+        
+        if (cedula.length < 5) {
+            mostrarMensaje("La cédula debe tener al menos 5 caracteres", "danger");
+            return;
+        }
+        
+        if (!fecha_nacimiento) {
+            mostrarMensaje("Por favor selecciona la fecha de nacimiento", "danger");
+            return;
+        }
+        
+        if (!responsable_financiero) {
+            mostrarMensaje("Por favor selecciona un responsable financiero", "danger");
+            return;
+        }
+        
+        toggleLoading(true);
+
+        try {
+            const response = await fetch(`${apiURL}/estudiantes`, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    nombre, 
+                    email, 
+                    cedula,
+                    fecha_nacimiento, 
+                    responsable_financiero
+                })
+            });
+
+            const result = await response.json();
+            
+            if (response.ok) {
+                mostrarMensaje(`Estudiante registrado exitosamente: ${result.nombre}`, "success");
+                document.getElementById("registro-estudiante-form").reset();
+                // Recargar el selector de responsables
+                await cargarResponsables();
+            } else {
+                mostrarMensaje(result.detail || "Error al registrar estudiante", "danger");
+            }
+        } catch (error) {
+            mostrarMensaje("Error de conexión al servidor", "danger");
+            console.error("Error:", error);
+        } finally {
+            toggleLoading(false);
+        }
+    });
+</script>
+</body>
+</html>

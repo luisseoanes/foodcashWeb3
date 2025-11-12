@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrando Sesión...</title>
+    <link rel="stylesheet" href="css/logout.css">
+    <link rel='shortcut icon' type='image/x-icon' href='img/FC.ico'>
+
+</head>
+
+<body>
+
+    <div class="logout-container">
+        <h2>Cerrando sesión...</h2>
+        <p>Por favor, espera un momento.</p>
+        <div class="loader"></div>
+    </div>
+
+    <script>
+        // Eliminar la sesión almacenada en localStorage
+        localStorage.removeItem("usuario");
+
+        // Redirigir al usuario a la página de login después de 2 segundos
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 2000);
+    </script>
+
+</body>
+
+</html>
