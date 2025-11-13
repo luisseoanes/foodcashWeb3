@@ -1,11 +1,9 @@
-<!--signup.html-->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuarios - FoodCash</title>
+    <title>Sistema de Autenticación</title>
     <style>
         * {
             box-sizing: border-box;
@@ -15,36 +13,41 @@
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #f4f7f9;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             padding: 20px;
         }
         
         .container {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            padding: 40px;
-            max-width: 450px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 900px;
             width: 100%;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 15px;
+            flex: 1 1 350px;
         }
         
         h1 {
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 28px;
         }
         
-        .subtitle {
-            color: #666;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 14px;
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
         
         form {
@@ -52,75 +55,36 @@
             flex-direction: column;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        input, select {
-            width: 100%;
+        input, select, button {
             padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
         }
         
         select {
             background-color: white;
-            cursor: pointer;
         }
         
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
         
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(0);
-        }
-        
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            background-color: #2980b9;
         }
         
         .alert {
-            padding: 12px;
-            margin-top: 20px;
-            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
             text-align: center;
-            font-size: 14px;
-            display: none;
-        }
-        
-        .alert.show {
-            display: block;
         }
         
         .alert-success {
@@ -138,94 +102,55 @@
         .loading {
             display: none;
             text-align: center;
-            margin-top: 15px;
-        }
-        
-        .loading.show {
-            display: block;
+            margin-top: 10px;
         }
         
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #667eea;
+            border-left-color: #3498db;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             animation: spin 1s linear infinite;
             display: inline-block;
             vertical-align: middle;
+            margin-right: 10px;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        .link-estudiantes {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .link-estudiantes a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .link-estudiantes a:hover {
-            text-decoration: underline;
-        }
-        
-        .required {
-            color: #e74c3c;
+        @media (max-width: 768px) {
+            .card {
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <h1>Sistema de Autenticación</h1>
+    
     <div class="container">
-        <h1>Registro de Usuarios</h1>
-        <p class="subtitle">Sistema FoodCash - Panel Administrativo</p>
-        
-        <form id="registro-form">
-            <div class="form-group">
-                <label for="usuario">Correo Electrónico <span class="required">*</span></label>
-                <input type="email" id="usuario" placeholder="ejemplo@correo.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="contraseña">Contraseña <span class="required">*</span></label>
-                <input type="password" id="contraseña" placeholder="Mínimo 6 caracteres" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="nombre">Nombre Completo <span class="required">*</span></label>
-                <input type="text" id="nombre" placeholder="Juan Pérez García" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="rol">Rol <span class="required">*</span></label>
-                <select id="rol" required>
-                    <option value="">Seleccione un rol</option>
-                    <option value="usuario">Usuario (Padre/Profesor)</option>
-                    <option value="vendedor">Vendedor</option>
+        <div class="card">
+            <h2>Registro de Usuario</h2>
+            <form id="registro-form">
+                <input type="text" id="usuario" placeholder="Usuario" required>
+                <input type="password" id="contraseña" placeholder="Contraseña" required>
+                <input type="text" id="nombre" placeholder="Nombre Completo" required>
+                <select id="rol">
+                    <option value="usuario">Usuario</option>
                     <option value="admin">Administrador</option>
-                </select>
-            </div>
+                    <option value="vendedor">Vendedor</option>
 
-            <button type="submit" id="submit-btn">Registrar Usuario</button>
-            
-            <div id="registro-loading" class="loading">
-                <span class="spinner"></span>
-                <p style="margin-top: 10px;">Procesando...</p>
-            </div>
-        </form>
-        
-        <div id="registro-mensaje" class="alert"></div>
-        
-        <div class="link-estudiantes">
-            <p>¿Necesitas registrar un estudiante?</p>
-            <a href="signup-estudiante.html">Ir a Registro de Estudiantes →</a>
+                </select>
+
+                <button type="submit">Registrar</button>
+                <div id="registro-loading" class="loading">
+                    <span class="spinner"></span> Procesando...
+                </div>
+            </form>
+            <div id="registro-mensaje" class="alert"></div>
         </div>
     </div>
 
@@ -233,93 +158,73 @@
         const apiURL = "http://127.0.0.1:8000";
         
         // Función para mostrar mensajes
-        function mostrarMensaje(mensaje, tipo) {
-            const elemento = document.getElementById('registro-mensaje');
+        function mostrarMensaje(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
             elemento.textContent = mensaje;
-            elemento.className = `alert alert-${tipo} show`;
-            
+            elemento.className = `alert alert-${tipo}`;
             setTimeout(() => {
+                elemento.textContent = '';
                 elemento.className = 'alert';
             }, 5000);
         }
         
         // Función para mostrar/ocultar indicador de carga
-        function toggleLoading(mostrar) {
-            const loading = document.getElementById('registro-loading');
-            const submitBtn = document.getElementById('submit-btn');
-            
-            if (mostrar) {
-                loading.classList.add('show');
-                submitBtn.disabled = true;
-            } else {
-                loading.classList.remove('show');
-                submitBtn.disabled = false;
-            }
+        function toggleLoading(elementId, mostrar) {
+            document.getElementById(elementId).style.display = mostrar ? 'block' : 'none';
         }
         
-        // Validación de email
-        function validarEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
+        // Validación básica
+        function validarUsuario(usuario) {
+            return usuario.length >= 3;
+        }
+        
+        function validarContraseña(contraseña) {
+            return contraseña.length >= 6;
         }
     
         // Registro de usuario
         document.getElementById("registro-form").addEventListener("submit", async function(event) {
             event.preventDefault();
 
-            const usuario = document.getElementById("usuario").value.trim();
-            const contraseña = document.getElementById("contraseña").value;
-            const nombre = document.getElementById("nombre").value.trim();
-            const rol = document.getElementById("rol").value;
+            let usuario = document.getElementById("usuario").value.trim();
+            let contraseña = document.getElementById("contraseña").value;
+            let nombre = document.getElementById("nombre").value.trim();
+            let rol = document.getElementById("rol").value;
+            let saldo = 0; // Establecer el saldo en 0
 
             // Validaciones frontend
-            if (!validarEmail(usuario)) {
-                mostrarMensaje("Por favor ingresa un correo electrónico válido", "danger");
+            if (!validarUsuario(usuario)) {
+                mostrarMensaje("registro-mensaje", "El usuario debe tener al menos 3 caracteres", "danger");
                 return;
             }
             
-            if (contraseña.length < 6) {
-                mostrarMensaje("La contraseña debe tener al menos 6 caracteres", "danger");
+            if (!validarContraseña(contraseña)) {
+                mostrarMensaje("registro-mensaje", "La contraseña debe tener al menos 6 caracteres", "danger");
                 return;
             }
             
-            if (nombre.length < 3) {
-                mostrarMensaje("El nombre debe tener al menos 3 caracteres", "danger");
-                return;
-            }
-            
-            if (!rol) {
-                mostrarMensaje("Por favor selecciona un rol", "danger");
-                return;
-            }
-            
-            toggleLoading(true);
+            toggleLoading("registro-loading", true);
 
             try {
-                const response = await fetch(`${apiURL}/registrar`, {
+                let response = await fetch(`${apiURL}/registrar`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        usuario, 
-                        contraseña, 
-                        nombre, 
-                        rol
-                    })
+                    body: JSON.stringify({ usuario, contraseña, nombre, rol, saldo }) // Enviar el saldo como 0
                 });
 
-                const result = await response.json();
+                let result = await response.json();
                 
                 if (response.ok) {
-                    mostrarMensaje(`Usuario registrado exitosamente: ${result.usuario}`, "success");
+                    mostrarMensaje("registro-mensaje", result.mensaje, "success");
                     document.getElementById("registro-form").reset();
                 } else {
-                    mostrarMensaje(result.detail || "Error al registrar usuario", "danger");
+                    mostrarMensaje("registro-mensaje", result.detail, "danger");
                 }
             } catch (error) {
-                mostrarMensaje("Error de conexión al servidor", "danger");
+                mostrarMensaje("registro-mensaje", "Error de conexión al servidor", "danger");
                 console.error("Error:", error);
             } finally {
-                toggleLoading(false);
+                toggleLoading("registro-loading", false);
             }
         });
     </script>

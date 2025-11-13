@@ -1,3 +1,5 @@
+# infrastructure/service/celo_service.py
+
 import os
 import logging
 from typing import Dict, Any, Optional, Tuple
@@ -19,11 +21,12 @@ class CeloService:
     
     # Dirección del contrato cCOP en Celo Mainnet
     # Esta es la dirección oficial del token cCOP (Colombian Peso) en Celo
-    CCOP_CONTRACT_ADDRESS = "0x00Be915B9dCf56a3CBE739D9B9c202ca692409EC"  # Mainnet
+    CCOP_CONTRACT_ADDRESS_MAINNET = "0x00Be915B9dCf56a3CBE739D9B9c202ca692409EC"  # Mainnet
+    CCOP_CONTRACT_ADDRESS_SEPOLIA = os.getenv("CCOP_CONTRACT_ADDRESS_SEPOLIA")  # Sepolia Testnet - Deploy tu contrato aquí
     
     # RPC endpoints
-    CELO_MAINNET_RPC = os.getenv("CELO_RPC_URL", "https://forno.celo.org")
-    CELO_TESTNET_RPC = os.getenv("CELO_TESTNET_RPC_URL", "https://alfajores-forno.celo-testnet.org")
+    CELO_MAINNET_RPC = os.getenv("CELO_MAINNET_RPC_URL", "https://forno.celo.org")
+    CELO_TESTNET_RPC = os.getenv("CELO_TESTNET_RPC_URL", "https://sepolia-forno.celo-testnet.org")  # Sepolia (anteriormente Alfajores)
     
     # ABI simplificado del token ERC20 (cCOP)
     ERC20_ABI = [
@@ -75,7 +78,7 @@ class CeloService:
         Inicializa el servicio de Celo.
         
         Args:
-            use_testnet: Si es True, usa la red de pruebas Alfajores. Si es False, usa Mainnet.
+            use_testnet: Si es True, usa la red de pruebas Sepolia. Si es False, usa Mainnet.
         """
         self.use_testnet = use_testnet
         
@@ -88,10 +91,10 @@ class CeloService:
         
         # Verificar conexión
         if not self.w3.is_connected():
-            logger.error(f"No se pudo conectar a Celo {'Testnet' if use_testnet else 'Mainnet'}")
+            logger.error(f"No se pudo conectar a Celo {'Sepolia Testnet' if use_testnet else 'Mainnet'}")
             raise ConnectionError(f"No se pudo conectar a Celo en {rpc_url}")
         
-        logger.info(f"Conectado a Celo {'Testnet (Alfajores)' if use_testnet else 'Mainnet'}")
+        logger.info(f"Conectado a Celo {'Sepolia Testnet' if use_testnet else 'Mainnet'}")
         
         # Cargar dirección de recepción de FoodCash
         self.foodcash_address = os.getenv("FOODCASH_CELO_ADDRESS")
@@ -102,11 +105,22 @@ class CeloService:
             self.foodcash_address = self.w3.to_checksum_address(self.foodcash_address)
             logger.info(f"Dirección de recepción FoodCash: {self.foodcash_address}")
         
+        # Seleccionar dirección del contrato según la red
+        if use_testnet:
+            contract_address = self.CCOP_CONTRACT_ADDRESS_SEPOLIA
+            if not contract_address:
+                raise ValueError("CCOP_CONTRACT_ADDRESS_SEPOLIA no configurada en .env. Debes deployar tu contrato ERC20 en Sepolia.")
+        else:
+            contract_address = self.CCOP_CONTRACT_ADDRESS_MAINNET
+        
         # Inicializar contrato cCOP
         self.ccop_contract = self.w3.eth.contract(
-            address=self.w3.to_checksum_address(self.CCOP_CONTRACT_ADDRESS),
+            address=self.w3.to_checksum_address(contract_address),
             abi=self.ERC20_ABI
         )
+        
+        # Guardar dirección del contrato para referencia
+        self.ccop_contract_address = contract_address
         
         # Obtener decimales del token
         try:
@@ -215,7 +229,7 @@ class CeloService:
         """
         try:
             # Verificar que sea del contrato cCOP
-            if log['address'].lower() != self.CCOP_CONTRACT_ADDRESS.lower():
+            if log['address'].lower() != self.ccop_contract_address.lower():
                 return None
             
             # El topic[0] es el hash del evento Transfer
@@ -303,7 +317,7 @@ class CeloService:
                 'amount_ccop': float(monto_recibido),
                 'expected_amount': float(monto_esperado),
                 'token': 'cCOP',
-                'network': 'Celo Testnet' if self.use_testnet else 'Celo Mainnet'
+                'network': 'Celo Sepolia Testnet' if self.use_testnet else 'Celo Mainnet'
             }
             
             logger.info(f"Pago verificado exitosamente: {tx_hash} - {monto_recibido} cCOP")
@@ -358,11 +372,11 @@ class CeloService:
         try:
             return {
                 'connected': self.w3.is_connected(),
-                'network': 'Testnet (Alfajores)' if self.use_testnet else 'Mainnet',
+                'network': 'Sepolia Testnet' if self.use_testnet else 'Mainnet',
                 'latest_block': self.w3.eth.block_number,
                 'chain_id': self.w3.eth.chain_id,
                 'gas_price': self.w3.eth.gas_price,
-                'ccop_contract': self.CCOP_CONTRACT_ADDRESS,
+                'ccop_contract': self.ccop_contract_address,
                 'foodcash_address': self.foodcash_address
             }
         except Exception as e:
