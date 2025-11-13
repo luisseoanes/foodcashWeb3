@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recarga Crypto - FoodCash</title>
+    <meta name='author' content='Luis Seoanes'>
+    <link rel="stylesheet" href="../../css/General.css">
+    <link rel='shortcut icon' type='image/x-icon' href='../../img/FC.ico'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1">
+    <link rel="stylesheet" href="../../css/padres/recargaCrypto.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <div class="one"></div><div class="two"></div><div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="student-selector"><span class="logo">Estudiante:</span><select id="estudiante-selector"></select></div>
+                <img src="../../img/FC.png" alt="logo" width="50" height="50">
+                <div class="saldo-container">
+                    <span id="saldo-texto">Saldo:</span>
+                    <span id="saldo-usuario"></span>
+                </div> 
+            </div>
+        </div>
+        <div class="sidebar">
+             <ul>
+                <li><a href="../../Padres.html"><span class="icon"><i class="fas fa-home"></i></span><span class="title">Inicio</span></a></li>
+                <li><a href="Alimentacion.html"><span class="icon"><i class="fas fa-carrot"></i></span><span class="title">Mi alimentacion</span></a></li>
+                <li><a href="Recarga.html"><span class="icon"><i class="fas fa-dollar-sign"></i></span><span class="title">Recarga</span></a></li>
+                <li><a href="RecargaCrypto.html" class="active"><span class="icon"><i class="fab fa-bitcoin"></i></span><span class="title">Recarga Crypto</span></a></li>
+                <li><a href="Comidas.html"><span class="icon"><i class="fas fa-hamburger"></i></span><span class="title">Comidas</span></a></li>
+                <li><a href="Controlp.html"><span class="icon"><i class="fas fa-users-cog"></i></span><span class="title">Parental</span></a></li>
+                <li><a href="pedido.html"><span class="icon"><i class="fas fa-utensils"></i></span><span class="title">Pedidos</span></a></li>
+                <li><a href="ayuda.html"><span class="icon"><i class="fas fa-headset"></i></span><span class="title">Ayuda</span></a></li>
+            </ul>
+        </div>
+
+        <div class="main_container">
+            <div class="container-flex">
+                <section class="recarga-container">
+                    <h2><i class="fab fa-bitcoin"></i> Recarga con Criptomonedas</h2>
+                    
+                    <!-- Selector de Criptomoneda -->
+                    <div class="crypto-selector">
+                        <h3>Selecciona tu Criptomoneda</h3>
+                        <div class="crypto-options">
+                            <button type="button" class="crypto-btn active" data-crypto="BTC" data-network="Bitcoin">
+                                <i class="fab fa-bitcoin"></i>
+                                <span>Bitcoin</span>
+                                <small>BTC</small>
+                            </button>
+                            <button type="button" class="crypto-btn" data-crypto="ETH" data-network="Ethereum">
+                                <i class="fab fa-ethereum"></i>
+                                <span>Ethereum</span>
+                                <small>ETH</small>
+                            </button>
+                            <button type="button" class="crypto-btn" data-crypto="USDT" data-network="TRC20">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span>Tether</span>
+                                <small>USDT</small>
+                            </button>
+                            <button type="button" class="crypto-btn" data-crypto="BNB" data-network="BSC">
+                                <i class="fas fa-coins"></i>
+                                <span>BNB</span>
+                                <small>BSC</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Recarga -->
+                    <form id="cryptoRecargaForm">
+                        <div class="form-group">
+                            <label for="amount">Monto a Recargar (COP):</label>
+                            <div class="quick-amount-buttons">
+                                <button type="button" class="btn-quick-amount" data-amount="50000">$50.000</button>
+                                <button type="button" class="btn-quick-amount" data-amount="100000">$100.000</button>
+                                <button type="button" class="btn-quick-amount" data-amount="200000">$200.000</button>
+                            </div>
+                            <input type="number" id="amount" min="50000" step="10000" placeholder="Mínimo $50.000 COP" required>
+                        </div>
+
+                        <!-- Conversión Crypto -->
+                        <div class="crypto-conversion">
+                            <div class="conversion-display">
+                                <div class="conversion-item">
+                                    <span class="label">Monto en COP:</span>
+                                    <span class="value" id="cop-amount">$0</span>
+                                </div>
+                                <div class="conversion-arrow">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="conversion-item">
+                                    <span class="label">Monto en <span id="crypto-symbol">BTC</span>:</span>
+                                    <span class="value crypto-value" id="crypto-amount">0.00000000</span>
+                                </div>
+                            </div>
+                            <div class="exchange-rate">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Tasa de cambio: <span id="exchange-rate">Cargando...</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Información de Red -->
+                        <div class="network-info">
+                            <div class="network-badge">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Red: <strong id="selected-network">Bitcoin</strong></span>
+                            </div>
+                            <div class="fee-info">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Fee de red estimado: <span id="network-fee">~0.0001 BTC</span></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-generar-address" id="btn-generate">
+                            <i class="fas fa-qrcode"></i> Generar Dirección de Pago
+                        </button>
+                    </form>
+
+                    <!-- Sección de Dirección de Pago (Oculta inicialmente) -->
+                    <div class="payment-address-section" id="payment-section" style="display: none;">
+                        <h3><i class="fas fa-wallet"></i> Envía tu pago a esta dirección</h3>
+                        
+                        <div class="qr-container">
+                            <div id="qr-code"></div>
+                            <p class="qr-instruction">Escanea el código QR con tu wallet</p>
+                        </div>
+
+                        <div class="address-container">
+                            <label>Dirección de Pago:</label>
+                            <div class="address-display">
+                                <input type="text" id="payment-address" readonly value="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa">
+                                <button type="button" class="btn-copy" id="btn-copy-address">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="payment-details">
+                            <div class="detail-row">
+                                <span class="label">Cantidad exacta a enviar:</span>
+                                <span class="value" id="exact-crypto-amount">0.00000000 BTC</span>
+                                <button type="button" class="btn-copy-small" data-copy="crypto-amount">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Red:</span>
+                                <span class="value" id="payment-network">Bitcoin</span>
+                            </div>
+                            <div class="detail-row important">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Envía SOLO <strong id="crypto-type">BTC</strong> a esta dirección</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-status">
+                            <div class="status-indicator waiting">
+                                <div class="spinner"></div>
+                                <span>Esperando pago...</span>
+                            </div>
+                            <div class="status-timer">
+                                <i class="fas fa-clock"></i>
+                                <span>Tiempo restante: <span id="countdown">30:00</span></span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-cancel" id="btn-cancel">
+                            <i class="fas fa-times"></i> Cancelar Transacción
+                        </button>
+                    </div>
+                </section>
+                
+                <div class="side-panel">
+                    <div class="tips-container crypto-tips">
+                        <h3><i class="fas fa-shield-alt"></i> Seguridad Crypto</h3>
+                        <div class="tip">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Verifica siempre la red correcta antes de enviar.</p>
+                        </div>
+                        <div class="tip">
+                            <i class="fas fa-clock"></i>
+                            <p>Las confirmaciones pueden tardar de 10-60 minutos.</p>
+                        </div>
+                        <div class="tip">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Las transacciones crypto son irreversibles.</p>
+                        </div>
+                        <div class="tip">
+                            <i class="fas fa-wallet"></i>
+                            <p>Monto mínimo: $50.000 COP por transacción.</p>
+                        </div>
+                    </div>
+
+                    <div class="crypto-prices">
+                        <h3><i class="fas fa-chart-line"></i> Precios en Vivo</h3>
+                        <div class="price-item">
+                            <span class="crypto-name"><i class="fab fa-bitcoin"></i> BTC</span>
+                            <span class="crypto-price" id="price-btc">Cargando...</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="crypto-name"><i class="fab fa-ethereum"></i> ETH</span>
+                            <span class="crypto-price" id="price-eth">Cargando...</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="crypto-name"><i class="fas fa-dollar-sign"></i> USDT</span>
+                            <span class="crypto-price" id="price-usdt">Cargando...</span>
+                        </div>
+                        <div class="price-item">
+                            <span class="crypto-name"><i class="fas fa-coins"></i> BNB</span>
+                            <span class="crypto-price" id="price-bnb">Cargando...</span>
+                        </div>
+                        <div class="last-update">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Actualizado hace <span id="last-update">0</span>s</span>
+                        </div>
+                    </div>
+
+                    <div class="card-preview">
+                        <div class="foodcash-card">
+                            <div class="card-logo-fc">FC</div>
+                            <div class="card-info">
+                                <div class="card-cedula" id="card-preview-id">1065557768</div>
+                                <div class="card-name" id="card-preview-name">NOMBRE ESTUDIANTE</div>
+                                <div class="card-brand">FOODCASH</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="../../js/padres/recargaCrypto.js"></script>
+<script src="../../js/general.js"></script>
+<script src="../../js/fuentes.js"></script>
+
+</body>
+</html>

@@ -328,7 +328,7 @@ switch (rol) {
             mostrarMensaje("Error de interfaz: falta selector de estudiantes.", "danger");
             return;
         }
-        if (!usuarioData || !usuarioData.nombre) {
+        if (!usuarioData || !usuarioData.usuario) {
             console.error("No hay datos de usuario para cargar hijos.");
             mostrarMensaje("Error: No se pudo identificar al responsable.", "danger");
             return;
@@ -336,7 +336,7 @@ switch (rol) {
 
         try {
             const response = await hacerPeticionAutenticada(
-                `${apiURL}/estudiantes/${encodeURIComponent(usuarioData.nombre)}/hijos`,
+                `${apiURL}/estudiantes/${encodeURIComponent(usuarioData.usuario)}/hijos`,
                 { method: "GET" }
             );
             if (!response.ok) {
